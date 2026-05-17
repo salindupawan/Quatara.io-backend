@@ -25,6 +25,11 @@ public class DemoController {
         return ResponseEntity.ok(profileData);
     }
 
+    @GetMapping("m")
+    public ResponseEntity<?> m() {
+        return ResponseEntity.ok("success");
+    }
+
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAdminData(@AuthenticationPrincipal ClerkUserPrincipal user) {
