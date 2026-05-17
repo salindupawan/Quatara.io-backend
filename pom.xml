@@ -108,7 +108,12 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-
+		<!-- clerk webhook cryptography-->
+		<dependency>
+			<groupId>com.svix</groupId>
+			<artifactId>svix</artifactId>
+			<version>1.21.0</version>
+		</dependency>
 	</dependencies>
 
         <build>

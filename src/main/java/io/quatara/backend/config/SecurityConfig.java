@@ -7,6 +7,7 @@ import io.quatara.backend.security.RateLimitingFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,6 +37,8 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(rateLimitingFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(req -> req
+                        .requestMatchers(HttpMethod.POST, "/api/v1/webhook/clerk/user").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/m").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(auth2 -> auth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(clerkJwtAuthenticationConverter))

@@ -32,7 +32,7 @@ public class User extends CreatedAtBaseEntity {
     @Column(name = "last_name", length = 100)
     private String lastName;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
