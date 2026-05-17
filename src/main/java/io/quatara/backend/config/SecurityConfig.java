@@ -38,7 +38,8 @@ public class SecurityConfig {
                 .addFilterBefore(rateLimitingFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(HttpMethod.POST, "/api/v1/webhook/clerk/user").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/m").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/demo-error").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/validate").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(auth2 -> auth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(clerkJwtAuthenticationConverter))
