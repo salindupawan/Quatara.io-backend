@@ -40,6 +40,15 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/webhook/clerk/user").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/demo-error").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/validate").permitAll()
+                        // OpenAPI/Swagger UI endpoints – allow unauthenticated access (GET only)
+                        .requestMatchers(HttpMethod.GET,
+                                "/v3/api-docs",
+                                "/v3/api-docs/**",
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/swagger-ui/index.html",
+                                "/webjars/**",
+                                "/v3/api-docs/swagger-config").permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(auth2 -> auth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(clerkJwtAuthenticationConverter))
