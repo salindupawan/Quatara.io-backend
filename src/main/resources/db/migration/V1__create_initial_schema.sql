@@ -41,7 +41,7 @@ CREATE TABLE projects (
                           client_name VARCHAR(255) NOT NULL,
                           client_email VARCHAR(255) NOT NULL,
                           project_name VARCHAR(255) NOT NULL,
-                          amount_cents BIGINT NOT NULL,
+                          deposit_amount DECIMAL(10, 2) NOT NULL,
                           organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
                           created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
                           updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP

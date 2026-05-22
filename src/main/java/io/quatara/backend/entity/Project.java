@@ -3,6 +3,7 @@ package io.quatara.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,8 +30,8 @@ public class Project extends BaseEntity {
     @Column(name = "project_name", nullable = false, length = 255)
     private String projectName;
 
-    @Column(name = "amount_cents", nullable = false)
-    private Long amountCents;
+    @Column(name = "deposit_amount", nullable = false)
+    private BigDecimal depositAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
