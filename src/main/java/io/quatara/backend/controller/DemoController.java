@@ -2,6 +2,7 @@ package io.quatara.backend.controller;
 
 import io.quatara.backend.dto.DemoRequest;
 import io.quatara.backend.security.ClerkUserPrincipal;
+import io.quatara.backend.util.TokenGenerator;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -44,7 +45,8 @@ public class DemoController {
 
     @GetMapping("m")
     public ResponseEntity<?> m() {
-        return ResponseEntity.ok("success");
+        String s = TokenGenerator.generateNewToken();
+        return ResponseEntity.ok("success: "+s);
     }
 
     @GetMapping("/admin")

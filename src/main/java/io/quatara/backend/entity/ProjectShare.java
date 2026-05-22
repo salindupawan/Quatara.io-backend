@@ -23,7 +23,7 @@ public class ProjectShare extends CreatedAtBaseEntity{
     private UUID id;
 
     // The cryptographically secure random string
-    @Column(nullable = false, unique = true, length = 32)
+    @Column(name = "token", nullable = false, unique = true, length = 32)
     private String token;
 
     // Relationship back to main Project entity
