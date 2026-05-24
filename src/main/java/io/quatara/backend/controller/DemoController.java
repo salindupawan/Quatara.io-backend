@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/demo")
 public class DemoController {
 
     // Endpoint to trigger MethodArgumentNotValidException via validation

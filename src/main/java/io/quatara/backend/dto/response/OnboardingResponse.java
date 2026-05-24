@@ -15,5 +15,6 @@ public class OnboardingResponse {
     private String clientName;
     private String projectName;
     private BigDecimal depositAmount;
+    private String token;
 
 }

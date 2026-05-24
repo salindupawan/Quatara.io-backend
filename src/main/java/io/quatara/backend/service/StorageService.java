@@ -3,8 +3,11 @@ package io.quatara.backend.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
+import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
 
@@ -35,6 +38,25 @@ public class StorageService {
         // 3. Generate the signed URL execution sequence
         PresignedPutObjectRequest preSignedRequest = s3Presigner.presignPutObject(preSignRequest);
 
+        return preSignedRequest.url().toString();
+    }
+
+    public String generatePreSignedDownloadUrl(String objectKey) {
+        // 1. Specify the target bucket and exact file key path
+        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                .bucket(bucketName)
+                .key(objectKey)
+                .responseContentType("application/pdf")
+                .build();
+
+        // 2. Set the expiration deadline (valid for 90 minutes)
+        GetObjectPresignRequest preSignRequest = GetObjectPresignRequest.builder()
+                .signatureDuration(Duration.ofMinutes(90))
+                .getObjectRequest(getObjectRequest)
+                .build();
+
+        // 3. Cryptographically sign the request structural payload
+        PresignedGetObjectRequest preSignedRequest = s3Presigner.presignGetObject(preSignRequest);
         return preSignedRequest.url().toString();
     }
 }

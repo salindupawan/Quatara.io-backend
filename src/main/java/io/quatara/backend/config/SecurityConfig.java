@@ -37,9 +37,10 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(rateLimitingFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(req -> req
+                        // clerk user.created webhook endpoint
                         .requestMatchers(HttpMethod.POST, "/api/v1/webhook/clerk/user").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/demo-error").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/validate").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/demo/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/demo/**").permitAll()
                         // OpenAPI/Swagger UI endpoints – allow unauthenticated access (GET only)
                         .requestMatchers(HttpMethod.GET,
                                 "/v3/api-docs",
